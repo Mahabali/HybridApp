@@ -1,0 +1,37 @@
+<!--<!DOCTYPE html>
+
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+
+<ion-view view-title="signup">
+    <ion-content class="padding">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="email" placeholder="Email" ng-model="user.email">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="user.password">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Confirm Password" ng-model="user.confirmPassword">
+            </label>
+            <label class="item item-input">
+                <input type="tel" placeholder="Mobile" ng-model="user.mobile">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="First Name" ng-model="user.firstName">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Last Name" ng-model="user.lastName">
+            </label>
+            <label class="item item-input">
+                <textarea placeholder="Address" ng-model="user.address"></textarea>
+            </label>
+            <button class="button button-block cingoThemeColor textWhiteColor" ng-click="signUp(user)">
+                Sign Up
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

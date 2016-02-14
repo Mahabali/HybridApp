@@ -1,0 +1,25 @@
+/* Empty. Add your own CSS if you like */
+.cingoThemeColor{
+    background: #33cc33;
+}
+
+.textWhiteColor{
+    color: #FFFFFF;
+   
+}
+
+.facebookColor{
+    background: #3b5998;
+}
+
+.googlePlusColor{
+    background:  #d34836;
+}
+
+.twitterColor{
+    background: #00aced;
+}
+
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+    color: #33cc33;
+}

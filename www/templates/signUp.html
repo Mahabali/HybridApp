@@ -1,0 +1,46 @@
+<!--<!DOCTYPE html>
+
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+
+<ion-view view-title="signup">
+    <ion-content class="padding">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="email" placeholder="Email" ng-model="user.email">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="user.password">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Confirm Password" ng-model="user.confirmPassword">
+            </label>
+            <button class="button button-block cingoThemeColor textWhiteColor" ng-click="signUp(user)">
+                Sign Up
+            </button>
+            <div style="float:right">
+            <div style="float:left;width:50%;">
+                <span style="height:180px; font-size: 20px;">
+                 Have an account?
+                </span>
+                  </div>
+            <div style="float:right;width:50%;font-size: 20px;">
+                <button class="button button-clear button-positive" ng-click="signIn()" >
+                Sign In
+                </button>
+            </div>
+            </div>
+            <button class="button button-block facebookColor textWhiteColor" >
+                Sign In with Facebook
+            </button>
+            <button class="button button-block googlePlusColor textWhiteColor" >
+                Sign In with Google +
+            </button>
+            <button class="button button-block twitterColor textWhiteColor" >
+                Sign In with Twitter
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
