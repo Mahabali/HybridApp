@@ -66,7 +66,7 @@
                 .state('tabs.settings', {
                     url: '/settings',
                     views: {
-                        'tabs-settings': {
+                        'Settings': {
                             templateUrl: 'templates/settings.html'
                            
                         }
