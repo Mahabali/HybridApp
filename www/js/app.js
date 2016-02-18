@@ -46,10 +46,20 @@
                 })
                 .state('tabs.vendors', {
                     url: '/vendors',
+                    
                     views: {
-                        'tabs-vendors': {
-                            templateUrl: 'templates/vendors.html'
-                            
+                        'Vendors': {
+                            templateUrl: 'templates/vendors.html',
+                            controller:'VendorController'
+                        }
+                    }
+                })
+                
+                .state('tabs.new.vendors', {
+                    url: '/addNewVendor',
+                   views: {
+                        'Vendors': {
+                             templateUrl: 'templates/addNewVendor.html' 
                         }
                     }
                 })
@@ -59,6 +69,15 @@
                     views: {
                         'tabs-requests': {
                             templateUrl: 'templates/requests.html'
+                            
+                        }
+                    }
+                })
+                .state('tabs.newVendors', {
+                    url: '/newVendors',
+                    views: {
+                        'Vendors': {
+                            templateUrl: 'templates/addNewVendor.html'
                             
                         }
                     }

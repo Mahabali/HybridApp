@@ -26,3 +26,12 @@ angular.module('Cingo.controllers',[])
         console.log("signIn tapped"+user.email);
     };
 })
+
+.controller('VendorController',function($scope,$state){
+    $scope.addNewVendor= function(){
+         console.log("vendor tapped");
+        $state.go('tabs.newVendors');
+       
+    };
+
+})
