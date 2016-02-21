@@ -17,6 +17,7 @@
                 // from snapping when text inputs are focused. Ionic handles this internally for
                 // a much nicer keyboard experience.
                 cordova.plugins.Keyboard.disableScroll(true);
+                
             }
             if (window.StatusBar) {
                 StatusBar.styleDefault();
@@ -55,14 +56,6 @@
                     }
                 })
                 
-                .state('tabs.new.vendors', {
-                    url: '/addNewVendor',
-                   views: {
-                        'Vendors': {
-                             templateUrl: 'templates/addNewVendor.html' 
-                        }
-                    }
-                })
 
                 .state('tabs.requests', {
                     url: '/requests',
@@ -77,7 +70,8 @@
                     url: '/newVendors',
                     views: {
                         'Vendors': {
-                            templateUrl: 'templates/addNewVendor.html'
+                            templateUrl: 'templates/addNewVendor.html',
+                            controller: 'addVendorController'
                             
                         }
                     }
@@ -93,4 +87,7 @@
                 });
         $urlRouterProvider.otherwise('/signUp');
     });
+    
+    // Wait for Cordova to load
+    
 }());

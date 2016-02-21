@@ -6,15 +6,38 @@ and open the template in the editor.
 -->
 
 <ion-view view-title="AddNewVendors">
-     <ion-nav-bar class="cingoThemeColor textWhiteColor">
-      </ion-nav-bar>
-<ion-header-bar class="bar bar-subheader item-input-inset">
-      <label class="item-input-wrapper search">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input placeholder="Search..." ng-keyup="searchList($event)" type="text">
-      </label>
- </ion-header-bar>
+    <ion-nav-bar class="cingoThemeColor textWhiteColor">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon  ion-chevron-left" ng-click="goBack()" style="color:white;" ></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-header-bar class="bar bar-subheader item-input-inset">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input placeholder="Search..." ng-keyup="searchList($event)" type="text"
+                   ng-model="search"
+                   ng-focus="searchFocused = true"
+                   ng-blur="searchFocused = false"
+                   ng-change="scrollTop()"
+                   class="full-width">
+            </input>
+            
+            <button ng-if="search.length"
+                    class="button button-icon ion-android-close input-button"
+                    ng-click="clearSearch()">
+            </button>
+           
+    </ion-header-bar>
     <ion-content class="padding backgroundLightGreyColor">
-        sdfdasaa
+        <ion-list>
+            <ion-item class="my-item"
+                      ng-repeat="item in getVendors()"
+                      item-height="getItemHeight(item)"
+                      id="{{ item.isLetter ? (item.letter + '_divider') : ''}}"
+                      ng-style="{'line-height': getItemHeight(item) + 'px'}"
+                      ng-class="{'item-divider': item.isLetter}">
+                <img ng-if="!item.isLetter" src="https://rm-core-production.s3.amazonaws.com/logos/521/medium_target_logo.jpg" >
+                {{item.letter|| item.name}}
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

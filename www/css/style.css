@@ -31,3 +31,20 @@
 .nav-bar-button-white-color{
     color:white;
 }
+
+.item img {
+  height: 60px;
+  width: 60px;
+  float: left;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.my-item.item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.full-width {
+  width: 100%;
+}
