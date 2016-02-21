@@ -76,6 +76,16 @@
                         }
                     }
                 })
+                    .state('tabs.customSettings', {
+                    url: '/customSettings',
+                    views: {
+                        'Vendors': {
+                            templateUrl: 'templates/customSettings.html',
+                            controller: 'CustomSettingsController'
+                            
+                        }
+                    }
+                })
                 .state('tabs.settings', {
                     url: '/settings',
                     views: {

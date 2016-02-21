@@ -47,7 +47,7 @@ angular.module('Cingo.controllers',[])
     
  })
  
- .controller('addVendorController', function($scope, $ionicScrollDelegate, $location, $anchorScroll,$ionicHistory) {
+ .controller('addVendorController', function($scope, $ionicScrollDelegate, $location, $anchorScroll,$ionicHistory,$state) {
   var letters = $scope.letters = [];
   var vendors = $scope.vendors = [];
   var currentCharCode = ' '.charCodeAt(0) - 1;
@@ -139,8 +139,17 @@ angular.module('Cingo.controllers',[])
       return true;
     });
   };
+  $scope.addVendor = function(item){
+      $state.go('tabs.customSettings');
+  };
+})
 
-
-
-
+  .controller('CustomSettingsController',function($scope,$ionicHistory){
+    $scope.signIn= function(user){
+        console.log("signIn tapped"+user.email);
+    };
+     $scope.signUp= function(user){
+        $ionicHistory.goBack();
+        console.log("signIn tapped"+user.email);
+    };
 });
