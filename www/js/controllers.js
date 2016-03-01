@@ -6,7 +6,11 @@
 
 angular.module('Cingo.controllers',[])
 
-.controller('SignUpController',function($scope,$state){
+.controller('SignUpController',function($scope,$state,DBService,$ionicPlatform){
+    $ionicPlatform.ready(function() {
+        console.log("Init DB");
+        DBService.initDB();
+    });
     $scope.signUp= function(signupForm,user,confirmPassword){
         console.log("signup tapped");
         if (signupForm.email.$invalid){
@@ -26,6 +30,7 @@ angular.module('Cingo.controllers',[])
         }
         else{
              console.log("valid");
+             DBService.addUser(user);
              $scope.shouldShowError = false;              
              $state.go('tabs.vendors');
         }
@@ -60,10 +65,47 @@ angular.module('Cingo.controllers',[])
     };
 })
 
-.controller('VendorController',function($scope,$state){
+.controller('VendorController',function($scope,$state,DBService){
+    
+    $scope.initialize = function(){
+          console.log("vendor initialized");
+         var users =  DBService.getAllUsers();
+         console.log(JSON.stringify(users));
+          
+    }
     $scope.addNewVendor= function(){
          console.log("vendor tapped");
         $state.go('tabs.newVendors');
+       
+    };
+
+})
+
+.controller('SettingsController',function($scope,$state,DBService){
+    
+   $scope.saveSettings= function(settingsForm,user,confirmPassword){
+        console.log("signup tapped");
+        if (settingsForm.email.$invalid){
+             console.log("invalid email");
+            $scope.formError = "Invalid Email Id";
+            $scope.shouldShowError = true;
+        }
+        else if (settingsForm.password.$invalid){
+             console.log("invalid password");
+            $scope.formError = "Password should be greater than 6 characters";
+            $scope.shouldShowError = true;        
+        }
+        else if (user.password !== confirmPassword){
+             console.log("Password != Confirm Password" + JSON.stringify(signupForm.password) + " "+JSON.stringify(signupForm.confirmPassword));
+            $scope.formError = "Passwords don't match. Try again";
+            $scope.shouldShowError = true;        
+        }
+        else{
+             console.log("valid");
+             DBService.addUser(user);
+             $scope.shouldShowError = false;              
+             $state.go('tabs.vendors');
+        }
        
     };
 

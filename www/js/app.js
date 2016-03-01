@@ -90,8 +90,8 @@
                     url: '/settings',
                     views: {
                         'Settings': {
-                            templateUrl: 'templates/settings.html'
-                           
+                            templateUrl: 'templates/settings.html',
+                            controller:'SettingsController'
                         }
                     }
                 });
