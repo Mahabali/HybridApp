@@ -10,21 +10,24 @@ and open the template in the editor.-->
       </ion-nav-bar>
     <ion-content class="padding backgroundLightGreyColor">
         <div class="list list-inset">
+    <form name="signinForm"  novalidate="" ng-submit="signIn(signinForm,user)">            
             <label class="item item-input">
-                <input type="email" placeholder="Email" ng-model="user.email">
+                <input type="email" placeholder="Email" name="email" ng-model="user.email" required>
             </label>
             <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="user.password">
+                <input type="password" placeholder="Password" name="password" ng-minlength="6" ng-model="user.password" required>
             </label>
+            <span ng-show="shouldShowError">{{formError}}</span>
             <button class="button button-clear button-positive" style="float:right">
                 Forgot Password
             </button>
-            <button class="button button-block cingoThemeColor textWhiteColor" ng-click="signIn(user)">
+            <button class="button button-block cingoThemeColor textWhiteColor" type="submit">
                 Sign In
             </button>
             <button class="button button-block cingoThemeColor textWhiteColor" ng-click="signUp()">
                 Sign Up
             </button>
+    </form>
         </div>
     </ion-content>
 </ion-view>

@@ -7,9 +7,29 @@
 angular.module('Cingo.controllers',[])
 
 .controller('SignUpController',function($scope,$state){
-    $scope.signUp= function(user){
+    $scope.signUp= function(signupForm,user,confirmPassword){
         console.log("signup tapped");
-         $state.go('tabs.vendors');
+        if (signupForm.email.$invalid){
+             console.log("invalid email");
+            $scope.formError = "Invalid Email Id";
+            $scope.shouldShowError = true;
+        }
+        else if (signupForm.password.$invalid){
+             console.log("invalid password");
+            $scope.formError = "Password should be greater than 6 characters";
+            $scope.shouldShowError = true;        
+        }
+        else if (user.password !== confirmPassword){
+             console.log("Password != Confirm Password" + JSON.stringify(signupForm.password) + " "+JSON.stringify(signupForm.confirmPassword));
+            $scope.formError = "Passwords don't match. Try again";
+            $scope.shouldShowError = true;        
+        }
+        else{
+             console.log("valid");
+             $scope.shouldShowError = false;              
+             $state.go('tabs.vendors');
+        }
+       
     };
     $scope.signIn = function(){
       $state.go('signIn');
@@ -17,8 +37,21 @@ angular.module('Cingo.controllers',[])
     
 })
 
-.controller('SignInController',function($scope,$ionicHistory){
-    $scope.signIn= function(user){
+.controller('SignInController',function($scope,$ionicHistory,$state){
+    $scope.signIn= function(signinForm,user){
+        if (signinForm.email.$invalid){
+             console.log("invalid email");
+            $scope.formError = "Invalid Email Id";
+            $scope.shouldShowError = true;
+        }
+        else if (signinForm.password.$invalid){
+             console.log("invalid password");
+            $scope.formError = "Password should be greater than 6 characters";
+            $scope.shouldShowError = true;        
+        }
+        else{
+             $state.go('tabs.vendors');
+        }
         console.log("signIn tapped"+user.email);
     };
      $scope.signUp= function(user){
