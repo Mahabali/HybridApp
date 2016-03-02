@@ -69,8 +69,6 @@ angular.module('Cingo.controllers',[])
     
     $scope.initialize = function(){
           console.log("vendor initialized");
-         var users =  DBService.getAllUsers();
-         console.log(JSON.stringify(users));
           
     }
     $scope.addNewVendor= function(){
@@ -82,9 +80,31 @@ angular.module('Cingo.controllers',[])
 })
 
 .controller('SettingsController',function($scope,$state,DBService){
+     $scope.$on('$ionicView.enter', function() {
+  DBService.getGlobalSettings(function(result){
+      $scope.user = result;
+      
+  });
+   console.log("user JSON "+JSON.stringify($scope.user));
+});
+$scope.onPasswordChange = function(password){
+    if (DBService.checkIfPasswordChanged(password) ){
+        console.log("password not changed");
+    $scope.passwordChanged = false;
+}
+else{
+    console.log("password changed");
+     $scope.passwordChanged = true;
     
+}
+};
+        $scope.initialize =function(){
+        console.log("initialize settings");
+   
+};
    $scope.saveSettings= function(settingsForm,user,confirmPassword){
         console.log("signup tapped");
+        
         if (settingsForm.email.$invalid){
              console.log("invalid email");
             $scope.formError = "Invalid Email Id";
@@ -108,6 +128,8 @@ angular.module('Cingo.controllers',[])
         }
        
     };
+
+
 
 })
 
@@ -227,4 +249,11 @@ angular.module('Cingo.controllers',[])
         $ionicHistory.goBack();
         console.log("signIn tapped"+user.email);
     };
-});
+})
+.controller('tabBarController',function($scope,$ionicHistory){
+    $scope.settingsTapped= function(){
+        console.log("Settings tapped");
+    };
+     
+})
+;

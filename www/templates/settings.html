@@ -5,19 +5,20 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.-->
 
 
-<ion-view view-title="Cingo">
+<ion-view view-title="Cingo" ng-init="initialize()" ng-controller="SettingsController">
      <ion-nav-bar class="cingoThemeColor textWhiteColor">
       </ion-nav-bar>
     <ion-content class="padding backgroundLightGreyColor">
+       <form name="settingsForm"  novalidate="" ng-submit="saveSettings(settingsForm,user,confirmPassword)">
         <div class="list list-inset">
-            <label class="item item-input">
-                <input type="email" placeholder="Email" ng-model="user.email">
+            <label class="item item-input" style="line-height: 240%">
+                <input type="email" placeholder="Email" ng-model="user.email" required>   
             </label>
             <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="user.password">
+                <input type="password" placeholder="Password" ng-model="user.password" ng-change="onPasswordChange(user.password,user)" required>
             </label>
-            <label class="item item-input">
-                <input type="password" placeholder="Confirm Password" ng-model="user.confirmPassword">
+            <label class="item item-input" ng-show="passwordChanged">
+                <input type="password" placeholder="Confirm Password" ng-model="confirmPassword" >
             </label>
             <label class="item item-input">
                 <input type="tel" placeholder="Mobile" ng-model="user.mobile">
@@ -46,8 +47,8 @@ and open the template in the editor.-->
         </div>
         <center>
         <div>
-            
-        <button class="button cingoThemeColor textWhiteColor" ng-click="save(user)">
+        <span ng-show="shouldShowError">{{formError}}</span>    
+        <button class="button cingoThemeColor textWhiteColor" type="submit">
                 Save
             </button>
         <button class="button cingoThemeColor textWhiteColor" ng-click="cancel()">
@@ -55,5 +56,6 @@ and open the template in the editor.-->
             </button>
         </div>
         </center>
+       </form>
     </ion-content>
 </ion-view>
