@@ -15,7 +15,7 @@ and open the template in the editor.-->
                 <input type="email" placeholder="Email" ng-model="user.email" required>   
             </label>
             <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="user.password" ng-change="onPasswordChange(user.password,user)" required>
+                <input type="password" placeholder="Password" ng-model="user.password" ng-change="onPasswordChange(user.password)" required>
             </label>
             <label class="item item-input" ng-show="passwordChanged">
                 <input type="password" placeholder="Confirm Password" ng-model="confirmPassword" >

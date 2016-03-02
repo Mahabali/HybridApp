@@ -22,7 +22,7 @@ function DBService($q) {
     }
     ;
     function checkIfPasswordChanged(password){
-        console.log(" "+_globalUser.password + "==" + password)
+        console.log(" "+_globalUser.password + "==" + JSON.stringify(password))
         if (_globalUser.password === password){
             return true;
         }
