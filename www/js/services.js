@@ -57,13 +57,15 @@ function DBService($q) {
                 if (err) {
                     return console.log(err);
                 }
-               
+               console.log("response doc " + JSON.stringify(doc));
                 var address;
                 var user = {
                     "email":doc.email,
                     "password":doc.password,
                     "firstName":doc.firstName,
-                "lastName":doc.lastName
+                "lastName":doc.lastName,
+                "mobile":doc.mobile,
+                _rev:doc._rev
                 }
                 if (doc.address === undefined){
                    address  =  {
@@ -84,32 +86,36 @@ function DBService($q) {
                 }
                  user.address = address;
                  _globalUser = user
-                  console.log("response " + JSON.stringify(user));
+                  console.log("response user " + JSON.stringify(user));
                  callback(user);
             }));
     }
     ;
 
     function setGlobalSettings(user) {
+        console.log("Global rev "+_globalUser._rev);
          var userDocument = {
             "_id": "globalSettings",
+            "_rev":_globalUser._rev,
             "email": user.email,
             "password": user.password,
             "firstName":user.firstName,
             "lastName":user.lastName,
+             "mobile":user.mobile,
             "address":{
-            "street":stringValue(user.address.street),
-            "city":stringValue(user.address.city),
-            "state":stringValue(user.address.state),
-            "zip":stringValue(user.address.zip)
+            "street":user.address.street,
+            "city":user.address.city,
+            "state":user.address.state,
+            "zip":user.address.zip
         }
         };
         _globalUser = userDocument;
+   console.log("save response " + JSON.stringify(_globalUser));        
         return $q.when(_db.put(userDocument).then(function (response) {
             // handle response
-            console.log("response " + JSON.stringify(response));
+            console.log("save response " + JSON.stringify(response));
         }).catch(function (err) {
-            console.log(err);
+            console.log(JSON.stringify(err));
         }));
 
     }

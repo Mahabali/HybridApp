@@ -79,6 +79,55 @@ angular.module('Cingo.controllers',[])
 
 })
 
+.controller('RequestsController',function($scope,$state,DBService){
+    
+    $scope.initialize = function(){
+     
+          console.log("requestsInitialized initialized" +  + " ");
+      };
+    $scope.addNewRequests= function(){
+         console.log("vendor tapped");
+        $state.go('tabs.newRequests');
+       
+    };
+
+})
+.controller('addRequestController',function($scope,$state,DBService,$ionicHistory){
+    
+    $scope.initialize = function(){
+          console.log("requestsInitialized initialized");
+               calculateAvailableTimeOptions();
+          function calculateAvailableTimeOptions(){
+                 var d = new Date();
+                 var minutes = d.getMinutes();
+                 var roundoffMinutes = 10 - (minutes%10);
+                 var timeOtpions = ["ASAP"];
+                 for (i = 0; i < 5;i++){
+                 var newDateObj = new Date(d.getTime() + ((i+1)*20)*60000 + (roundoffMinutes * 60000));
+                 var formattedMinutes = newDateObj.getMinutes() < 10 ? ("0"+newDateObj.getMinutes()):newDateObj.getMinutes();
+                 var formattedHours = newDateObj.getHours() > 12 ? (newDateObj.getHours()-12):newDateObj.getHours();
+                 var ampm = newDateObj.getHours() > 12 ? "pm":"am";
+                 var newTimeOption = formattedHours + ":" + formattedMinutes+ " "+ampm;
+                 timeOtpions.push(newTimeOption);
+              }
+              $scope.timeOptions = timeOtpions;
+                 console.log("time options  "+ JSON.stringify(timeOtpions));
+          }
+          
+          $scope.vendors = ["Target","SilverCar","HomeAway","DirectTV","macy's"];
+          $scope.departments = ["General","Bookings"];
+          $scope.request = {};
+          $scope.request.vendor = $scope.vendors[0];
+          $scope.request.callbackTime = $scope.timeOptions[1];
+          $scope.request.department = $scope.departments[0];
+    };
+    $scope.addNewRequest= function(newRequestForm,request){
+         console.log("new requests" + JSON.stringify(request));
+         alert('Request Created');
+          $ionicHistory.goBack();
+    };
+
+})
 .controller('SettingsController',function($scope,$state,DBService){
      $scope.$on('$ionicView.enter', function() {
   DBService.getGlobalSettings(function(result){
@@ -115,16 +164,16 @@ else{
             $scope.formError = "Password should be greater than 6 characters";
             $scope.shouldShowError = true;        
         }
-        else if (user.password !== confirmPassword){
-             console.log("Password != Confirm Password" + JSON.stringify(signupForm.password) + " "+JSON.stringify(signupForm.confirmPassword));
+        else if ($scope.passwordChanged && user.password !== confirmPassword){
             $scope.formError = "Passwords don't match. Try again";
             $scope.shouldShowError = true;        
         }
         else{
              console.log("valid");
-             DBService.addUser(user);
+             DBService.setGlobalSettings(user);
+             $scope.user = user;
              $scope.shouldShowError = false;              
-             $state.go('tabs.vendors');
+             alert('User Saved');
         }
        
     };

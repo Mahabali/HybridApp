@@ -60,8 +60,9 @@
                 .state('tabs.requests', {
                     url: '/requests',
                     views: {
-                        'tabs-requests': {
-                            templateUrl: 'templates/requests.html'
+                        'Requests': {
+                            templateUrl: 'templates/requests.html',
+                            controller: 'RequestsController'
                             
                         }
                     }
@@ -72,6 +73,17 @@
                         'Vendors': {
                             templateUrl: 'templates/addNewVendor.html',
                             controller: 'addVendorController'
+                            
+                        }
+                    }
+                })
+                
+                .state('tabs.newRequests', {
+                    url: '/newRequest',
+                    views: {
+                        'Requests': {
+                            templateUrl: 'templates/addNewRequest.html',
+                            controller: 'addRequestController'
                             
                         }
                     }

@@ -4,13 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ion-view view-title="Requests" ng-init="initialize()">
+  <ion-nav-bar class="cingoThemeColor textWhiteColor">
+      </ion-nav-bar>
+    <ion-nav-buttons side="right" ng-show="true" >
+        <button class="button  button-clear button-icon ion-plus" style="color:white;"
+                ng-click="addNewRequests()">
+        </button>
+      </ion-nav-buttons>
+    <ion-content class="padding backgroundLightGreyColor">         
+         
+    </ion-content>
+</ion-view>

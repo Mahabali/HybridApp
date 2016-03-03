@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<ion-view view-title="Add New Request"  ng-init="initialize()">
+    <ion-nav-bar class="cingoThemeColor textWhiteColor">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon  ion-chevron-left" ng-click="goBack()" style="color:white;" ></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    
+    <ion-content class="padding backgroundLightGreyColor">
+        <div class="list list-inset">
+            <form name="newRequestForm"  novalidate ng-submit="addNewRequest(newRequestForm,request)">
+            <label class="item item-input">
+                <div class="input-label">
+                Request Details
+            </div>
+                <textarea  placeholder="Request Details" name="requestDetails" ng-model="request.details" required></textarea>
+            </label>    
+            <label class="item item-input">
+                 <div class="input-label">
+                Callback Time
+            </div>
+                <select ng-options="choice for choice in timeOptions" ng-model="request.callbackTime"></select>
+            </label>
+           <label class="item item-input">
+                 <div class="input-label">
+                Vendors
+            </div>
+                <select  ng-options="choice for choice in vendors" ng-model="request.vendor"></select>
+            </label>
+                <label class="item item-input">
+                 <div class="input-label">
+                Department
+            </div>
+                <select ng-options="choice for choice in departments" ng-model="request.department"></select>
+            </label>
+                  <label class="item item-input">
+                 <div class="input-label">
+                Attachment
+            </div>
+                No file attachments
+            </label>
+                <button class="button button-block cingoThemeColor textWhiteColor" type="submit">
+                Submit
+            </button>
+            <span ng-show="shouldShowError">{{formError}}</span>
+            </form>
+        </div> 
+    </ion-content>
+</ion-view>
