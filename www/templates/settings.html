@@ -7,6 +7,9 @@ and open the template in the editor.-->
 
 <ion-view view-title="Cingo" ng-init="initialize()" ng-controller="SettingsController">
      <ion-nav-bar class="cingoThemeColor textWhiteColor">
+             <ion-nav-buttons side="right" ng-show="true">
+                 <button class="button button-clear" ng-click="logOut()"><span class="nav-bar-button-white-color">Logout</span></button>
+        </ion-nav-buttons>
       </ion-nav-bar>
     <ion-content class="padding backgroundLightGreyColor">
        <form name="settingsForm"  novalidate ng-submit="saveSettings(settingsForm,user,confirmPassword)">

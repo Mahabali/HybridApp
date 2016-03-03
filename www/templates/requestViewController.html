@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<ion-view view-title="">
+     <ion-nav-bar class="cingoThemeColor textWhiteColor">
+      <ion-nav-title>
+     {{request.requestId}}
+    </ion-nav-title>
+      </ion-nav-bar>
+    <ion-content class="padding backgroundLightGreyColor">
+        <div class="card">
+  <div class="item item-text-wrap">
+      <img src="{{request.vendorLogo}}">
+  </div>
+</div>
+        <div class="card">
+  <div class="item item-divider">
+    Status : {{request.status}}
+  </div>
+  <div class="item item-text-wrap">
+    {{request.details}}
+  </div>
+  <div class="item item-divider">
+    {{request.requestCreatedDate}}
+  </div>
+</div>
+        
+    </ion-content>
+</ion-view>

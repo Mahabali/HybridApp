@@ -13,6 +13,15 @@ and open the template in the editor.
         </button>
       </ion-nav-buttons>
     <ion-content class="padding backgroundLightGreyColor">         
-         
+         <div class="list list-inset">
+             
+  <div class="item item-text-wrap">
+      <img  class="aspectFitImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Target_Logo.svg/200px-Target_Logo.svg.png" />
+      <p style="line-height: 150%;font: bold;"> {{request.details}}</p>
+      <p>Status : {{request.status}}</p>
+      <p>Time : {{request.requestFormattedDate}}</p>
+
+  </div>
+</div>
     </ion-content>
 </ion-view>

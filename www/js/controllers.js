@@ -79,15 +79,21 @@ angular.module('Cingo.controllers',[])
 
 })
 
-.controller('RequestsController',function($scope,$state,DBService){
+.controller('RequestsController',function($scope,$state,DBService,$filter){
     
     $scope.initialize = function(){
      
-          console.log("requestsInitialized initialized" +  + " ");
+          console.log("requestsInitializeds");
+          $scope.requests = [];
+          DBService.getRequest(function(result){
+              
+              $scope.request = result;
+              $scope.request.requestFormattedDate = $filter('date')(new Date(),'MMMM dd,yyyy hh:mm a');
+          });
       };
     $scope.addNewRequests= function(){
          console.log("vendor tapped");
-        $state.go('tabs.newRequests');
+        $state.go('tabs.newRequest');
        
     };
 
@@ -123,9 +129,15 @@ angular.module('Cingo.controllers',[])
     };
     $scope.addNewRequest= function(newRequestForm,request){
          console.log("new requests" + JSON.stringify(request));
+         request.status = "Queued";
+         request.requestCreatedDate = new Date();
+         DBService.createNewRequest(request);
          alert('Request Created');
           $ionicHistory.goBack();
     };
+    $scope.goBack = function(){
+        $ionicHistory.goBack();
+    }
 
 })
 .controller('SettingsController',function($scope,$state,DBService){
@@ -177,21 +189,14 @@ else{
         }
        
     };
-
+$scope.logout = function(){
+   // DBService.setGlobalSettings("");
+}
 
 
 })
 
-.controller('addVendorControllers',function($scope,$ionicHistory){
 
-    $scope.vendors=[{name:"Target",image:""},{name:"HomeAway",image:""},{name:"SilverCar",image:""},{name:"DirectTV",image:""},{name:"macy's",image:""}]
-    $scope.goBack= function(){
-         console.log("vendor tapped");
-       $ionicHistory.goBack();
-       
-    };
-    
- })
  
  .controller('addVendorController', function($scope, $ionicScrollDelegate, $location, $anchorScroll,$ionicHistory,$state) {
   var letters = $scope.letters = [];
@@ -304,5 +309,15 @@ else{
         console.log("Settings tapped");
     };
      
+})
+
+  .controller('viewRequestController',function($scope,$ionicHistory){
+    $scope.signIn= function(user){
+        console.log("signIn tapped"+user.email);
+    };
+     $scope.signUp= function(user){
+        $ionicHistory.goBack();
+        console.log("signIn tapped"+user.email);
+    };
 })
 ;

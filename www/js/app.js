@@ -6,7 +6,7 @@
 (function () {
     var app = angular.module('starter', ['ionic', 'Cingo.controllers', 'Cingo.services'])
 
-    app.run(function ($ionicPlatform) {
+    app.run(function ($ionicPlatform,DBService,$state,$location,$rootScope) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,6 +23,15 @@
                 StatusBar.styleDefault();
             }
         });
+        
+        var user = DBService.getGlobalSettings();
+//        if (user != undefined){
+//             $location.path('/tabs/vendors');
+//        }
+//        else{
+//             $location.path('/signUp');
+//        }
+//         $rootScope.$apply();
     })
     app.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -78,12 +87,22 @@
                     }
                 })
                 
-                .state('tabs.newRequests', {
+                .state('tabs.newRequest', {
                     url: '/newRequest',
                     views: {
                         'Requests': {
                             templateUrl: 'templates/addNewRequest.html',
                             controller: 'addRequestController'
+                            
+                        }
+                    }
+                })
+                .state('tabs.viewRequest', {
+                    url: '/viewRequest',
+                    views: {
+                        'Requests': {
+                            templateUrl: 'templates/requestViewController.html',
+                            controller: 'viewRequestController'
                             
                         }
                     }

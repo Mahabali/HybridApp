@@ -35,13 +35,14 @@ and open the template in the editor.
                       id="{{ item.isLetter ? (item.letter + '_divider') : ''}}"
                       ng-style="{'line-height': getItemHeight(item) + 'px'}"
                       ng-class="{'item-divider': item.isLetter}">
-                <img ng-if="!item.isLetter" src="https://rm-core-production.s3.amazonaws.com/logos/521/medium_target_logo.jpg" >
+                <img class="addVendorThumbImage" ng-if="!item.isLetter" src="https://rm-core-production.s3.amazonaws.com/logos/521/medium_target_logo.jpg" >
                 {{item.letter|| item.name}}
                  <!--<button ng-if="!item.isLetter" class="button button-icon icon  ion-plus item-button-right" ng-click="" style="color:black;" ></button>-->
                  <div class="item-button-right" ng-if="!item.isLetter">
                  <button class="button button-icon icon ion-plus" ng-click="addVendor(item)">
                 </button>
                  </div>
+                 
             </ion-item>
         </ion-list>
     </ion-content>

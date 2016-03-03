@@ -13,6 +13,8 @@ function DBService($q) {
         addUser: addUser,
         getGlobalSettings: getGlobalSettings,
         setGlobalSettings: setGlobalSettings,
+        getRequest: getRequest,
+        createNewRequest:createNewRequest,
         checkIfPasswordChanged: checkIfPasswordChanged
     };
 
@@ -52,6 +54,9 @@ function DBService($q) {
 
 
     function getGlobalSettings(callback) {
+        if (_db == undefined){
+            initDB();
+        }
    
         return $q.when(_db.get('globalSettings', function (err, doc) {
                 if (err) {
@@ -87,7 +92,9 @@ function DBService($q) {
                  user.address = address;
                  _globalUser = user
                   console.log("response user " + JSON.stringify(user));
+                  if (callback != undefined){
                  callback(user);
+                  }
             }));
     }
     ;
@@ -120,6 +127,44 @@ function DBService($q) {
 
     }
     ;
+    
+     function createNewRequest(request) {
+        console.log("Global rev "+_globalUser._rev);
+         var requestDocument = {
+            "_id": "request",
+            "_rev":"1-2913f4c2b0f76458f4a9eb220c343475",
+            "request":request
+        }
+       
+   console.log("save response " + JSON.stringify(_globalUser));        
+        return $q.when(_db.post(requestDocument).then(function (response) {
+            // handle response
+            console.log("save response " + JSON.stringify(response));
+        }).catch(function (err) {
+            console.log(JSON.stringify(err));
+        }));
+    }
+    ;
+    
+    function getRequest(callback){
+        return $q.when(_db.get('request', function (err, doc) {
+                if (err) {
+                    if (err.status === 404){
+                        return callback(0);
+                    }
+                    return console.log(JSON.stringify(err));
+                }
+     
+               console.log("response doc " + JSON.stringify(doc));
+               
+                var request = doc.request;
+                request._rev = doc._rev;
+                  console.log("response user " + JSON.stringify(request));
+                  if (callback != undefined){
+                 callback(request);
+                  }
+            }));
+    }
     
     function userObject(){
       var user = {
